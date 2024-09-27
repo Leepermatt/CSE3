@@ -18,3 +18,5 @@ node_modules
 # ignore readme file
 README.md
 
+# ingore lock yaml file
+pnpm-lock.yaml
