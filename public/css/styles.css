@@ -4,3 +4,87 @@
 *:after {
   box-sizing: border-box;
 }
+
+/* Styling the Header */
+#top-header {
+  width: 100%;
+  background-color: #f4f4f4;
+  padding: 15px 0;
+  display: flex;
+  justify-content: space-between;
+  /* Space between site name and account tools */
+  align-items: center;
+  text-align: center;
+}
+
+/* Bold the Site Name Link */
+#top-header .siteName a {
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+  font-size: 24px;
+  /* Increase font size for the site name */
+}
+
+/* General Reset for Padding and Margin */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Styling the Tools (My Account) */
+#top-header #tools a {
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+}
+
+#top-header #tools a:hover {
+  color: #007BFF;
+  /* Add hover effect for the My Account link */
+}
+
+/* Styling the Body */
+/* body {
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+} */
+
+/* Styling the Navigation Bar */
+nav {
+  /* position: absolute; */
+  /* top: 0; */
+  width: 100%;
+  text-align: center;
+  background-color: #171616;
+  padding: 10px 0;
+  color: #ebe9e9;
+}
+
+/* Centering the List Items */
+nav ul {
+  list-style: none;
+}
+
+/* Styling the Navigation Links */
+nav ul li {
+  display: inline-block;
+  margin: 0 15px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  /* Bolds the links */
+  font-size: 18px;
+}
+
+nav ul li a:hover {
+  color: #007BFF;
+  /* Adds hover effect */
+}
