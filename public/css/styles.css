@@ -166,17 +166,25 @@ main {
 /* Upgrades container takes up 48% of the width */
 .upgrades {
   width: 48%;
+  margin-top: 30px;
+  text-align: center;
+  /* Center the heading */
+}
+
+/* Grid container for the upgrade items */
+.upgrades-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   /* 2 columns */
   grid-gap: 20px;
   /* Space between upgrade items */
-  text-align: center;
+  margin-top: 20px;
+  /* Space between heading and grid */
 }
 
 /* Individual upgrade item */
 .upgrade-item {
-  background-color: #f9f9f9;
+  background-color: #22a2e2;
   padding: 15px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
