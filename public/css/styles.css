@@ -118,10 +118,12 @@ main {
   /* Center the content inside */
   margin-bottom: 40px;
   background-color: #f1f1f1;
+  position: relative;
   /* Optional background to make it stand out */
-  padding: 20px 0;
+  /* padding: 20px 0; */
   /* Add some padding for spacing */
 }
+
 
 .delorean-image {
   width: 100%;
@@ -130,11 +132,33 @@ main {
   /* Limit the maximum width */
   height: auto;
   /* Maintain aspect ratio */
-  margin: 20px 0;
+  /* margin: 20px 0; */
   /* Add margin for spacing */
 }
 
+.promo-content {
+  position: relative;
+}
 
+
+/* Promo text box styling */
+.promo-text {
+  position: absolute;
+  bottom: 10%;
+  /* Adjust the vertical position (10% above bottom of image) */
+  left: 10%;
+  /* Adjust the horizontal position (10% from left edge) */
+  width: 33%;
+  /* Takes up 1/3 of the page width */
+  background-color: rgba(0, 0, 0, 0.7);
+  /* Semi-transparent background for contrast */
+  color: white;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  /* Optional box shadow for emphasis */
+  border-radius: 8px;
+  /* Slightly round the corners */
+}
 
 .cta-button {
   display: inline-block;
