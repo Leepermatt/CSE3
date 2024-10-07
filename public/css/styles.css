@@ -100,44 +100,117 @@ nav ul li a:hover {
   /* Add margin for spacing */
 }
 
-/* Upgrades Section */
-.upgrades {
-  display: flex;
-  justify-content: space-between;
-  /* Spread the items evenly */
-  flex-wrap: wrap;
-  /* Allow wrapping of items if needed */
-  margin-top: 20px;
-  text-align: center;
-  /* Center the text and images */
+/* Overall page styling */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+/* Main content wrapper */
+main {
+  padding: 20px;
+  width: 100%;
+  max-width: 1200px;
+  /* Restricting maximum width for better layout */
+  margin: 0 auto;
+}
+
+/* Header section */
+h1,
+h2,
+h3 {
+  text-align: center;
+}
+
+/* Promo section styling */
+.promo {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.delorean-image {
+  max-width: 100%;
+  height: auto;
+  margin: 20px 0;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007BFF;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.cta-button:hover {
+  background-color: #0056b3;
+}
+
+/* Upgrades and Reviews section */
+.upgrades,
+.reviews {
+  margin-top: 30px;
+}
+
+/* Flexbox container for upgrades and reviews */
+main {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+/* Upgrades container takes up 48% of the width */
+.upgrades {
+  width: 48%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* 2 columns */
+  grid-gap: 20px;
+  /* Space between upgrade items */
+  text-align: center;
+}
+
+/* Individual upgrade item */
 .upgrade-item {
-  width: 22%;
-  /* Set width to make 4 items fit in a row */
-  background-color: #235bd3;
-  /* Light background for upgrade items */
+  background-color: #f9f9f9;
   padding: 15px;
-  margin: 10px 0;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   /* Subtle shadow */
 }
 
+/* Upgrade images */
 .upgrade-item img {
-  width: 100px;
-  /* Set a specific width for the image */
+  max-width: 80px;
+  /* Adjust image size */
   height: auto;
-  /* Keep the aspect ratio */
-  display: block;
-  margin: 0 auto 10px;
-  /* Center image and add margin */
+  margin-bottom: 10px;
 }
 
 .upgrade-item p {
-  margin-top: 10px;
   font-weight: bold;
-  color: #333;
-  text-decoration: none;
-  /* Optional: remove underline */
+}
+
+/* Reviews section takes up 48% of the width */
+.reviews {
+  width: 48%;
+}
+
+.reviews ul {
+  list-style-type: none;
+  /* Remove bullet points */
+  padding: 0;
+}
+
+.reviews li {
+  background-color: #f9f9f9;
+  margin-bottom: 10px;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Subtle shadow */
 }
