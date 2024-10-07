@@ -45,14 +45,7 @@
   /* Add hover effect for the My Account link */
 }
 
-/* Styling the Body */
-/* body {
-  font-family: Arial, sans-serif;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-} */
+
 
 /* Styling the Navigation Bar */
 nav {
@@ -89,16 +82,15 @@ nav ul li a:hover {
   /* Adds hover effect */
 }
 
-.delorean-image {
-  width: 100%;
-  /* Responsive image */
-  max-width: 600px;
-  /* Limit the maximum width */
-  height: auto;
-  /* Maintain aspect ratio */
-  margin: 20px 0;
-  /* Add margin for spacing */
+
+/* Header section */
+h1,
+h2,
+h3 {
+  text-align: center;
 }
+
+
 
 /* Overall page styling */
 body {
@@ -117,24 +109,32 @@ main {
   margin: 0 auto;
 }
 
-/* Header section */
-h1,
-h2,
-h3 {
-  text-align: center;
-}
 
 /* Promo section styling */
 .promo {
+  width: 100%;
+  /* Make sure the section takes full width */
   text-align: center;
+  /* Center the content inside */
   margin-bottom: 40px;
+  background-color: #f1f1f1;
+  /* Optional background to make it stand out */
+  padding: 20px 0;
+  /* Add some padding for spacing */
 }
 
 .delorean-image {
-  max-width: 100%;
+  width: 100%;
+  /* Responsive image */
+  max-width: 600px;
+  /* Limit the maximum width */
   height: auto;
+  /* Maintain aspect ratio */
   margin: 20px 0;
+  /* Add margin for spacing */
 }
+
+
 
 .cta-button {
   display: inline-block;
