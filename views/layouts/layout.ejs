@@ -1,17 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include('../partials/head')%>
 
-    <body>
-        <div id="wrapper">
+<head>
+    <%- include('../partials/head')%> <!-- Includes head partial correctly -->
+</head>
+
+<body>
+    <div class="checkerboard-border">
+        <!-- Wrapper for entire content including header, navigation, main, and footer -->
+        <div class="content-wrapper">
+            <!-- Include header partial -->
             <%- include('../partials/header') %>
+
+                <!-- Include navigation partial -->
                 <%- include('../partials/navigation') %>
+
+                    <!-- Main content area -->
                     <main>
-                        <%- body %>
+                        <%- body %> <!-- Page-specific content goes here -->
                     </main>
 
+                    <!-- Include footer partial -->
                     <%- include('../partials/footer') %>
         </div>
-    </body>
+    </div>
+</body>
 
 </html>
