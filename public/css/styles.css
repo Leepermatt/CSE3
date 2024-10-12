@@ -8,7 +8,7 @@
 /* Styling the Header */
 #top-header {
   width: 100%;
-  background-color: #f4f4f4;
+  background-color: #1ce96e;
   padding: 15px 0;
   display: flex;
   justify-content: space-between;
@@ -41,7 +41,7 @@
 }
 
 #top-header #tools a:hover {
-  color: #007BFF;
+  color: #07c09e;
   /* Add hover effect for the My Account link */
 }
 
@@ -74,7 +74,7 @@ nav ul li a {
   color: #333;
   font-weight: bold;
   /* Bolds the links */
-  font-size: 18px;
+  font-size: 1rem;
 }
 
 nav ul li a:hover {
@@ -187,16 +187,18 @@ main {
   /* Optional box shadow for emphasis */
   border-radius: 8px;
   /* Slightly round the corners */
+  font-size: 1rem;
 }
 
 .cta-button {
   display: inline-block;
   padding: 10px 20px;
-  background-color: #007BFF;
-  color: white;
+  background-color: #1ce96e;
+  color: rgb(10, 10, 10);
   text-decoration: none;
   border-radius: 5px;
   margin-top: 10px;
+  font-size: 1rem;
 }
 
 .cta-button:hover {
@@ -237,7 +239,7 @@ main {
 
 /* Individual upgrade item */
 .upgrade-item {
-  background-color: #22a2e2;
+  background-color: #1ce96e;
   padding: 15px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
