@@ -275,3 +275,66 @@ main {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   /* Subtle shadow */
 }
+
+/* Adjust layout for screens smaller than 768px (typical tablet size) */
+@media (max-width: 768px) {
+  nav ul li {
+    display: block;
+    /* Stack the navigation links vertically */
+    margin: 10px 0;
+  }
+
+  .promo-text {
+    width: 80%;
+    /* Expand promo text box to take up more space */
+    left: 50%;
+    transform: translateX(-50%);
+    /* Center the promo text */
+  }
+
+  .upgrades,
+  .reviews {
+    width: 100%;
+    /* Stack upgrades and reviews on top of each other */
+  }
+
+  .upgrades-grid {
+    grid-template-columns: 1fr;
+    /* Change to a single-column grid */
+  }
+
+  .upgrade-item {
+    padding: 10px;
+    /* Reduce padding for smaller screens */
+  }
+
+  .reviews li {
+    padding: 10px;
+    /* Reduce padding for reviews */
+  }
+
+  .delorean-image {
+    max-width: 100%;
+    /* Make the image take full width */
+  }
+}
+
+/* Adjust layout for screens smaller than 480px (mobile size) */
+@media (max-width: 480px) {
+  .promo-text {
+    font-size: 14px;
+    padding: 15px;
+    /* Adjust font size and padding for smaller screens */
+  }
+
+  .cta-button {
+    font-size: 14px;
+    padding: 8px 16px;
+    /* Adjust button size for small screens */
+  }
+
+  .upgrade-item img {
+    max-width: 50px;
+    /* Reduce upgrade image size */
+  }
+}
