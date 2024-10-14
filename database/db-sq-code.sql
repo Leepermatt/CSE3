@@ -234,3 +234,13 @@ VALUES (
         'White',
         5
     );
+-- chagne interio fo hummer
+UPDATE public.inventory
+SET inv_description = REPLACE(
+        inv_description,
+        'small interiors',
+        'a huge interior'
+    ) --update and add /vehicles to file path
+UPDATE public.inventory
+SET inv_image = REPLACE(inv_image, '/images/', '/images/vehicles/'),
+    inv_thumbnail = REPLACE(inv_thumbnail, '/images/', '/images/vehicles/');
