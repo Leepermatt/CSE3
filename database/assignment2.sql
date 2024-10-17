@@ -6,7 +6,7 @@ VALUES (
         'tony@starkent.com',
         'Iam1ronM@n'
     );
--- update to admin
+-- update to Admin
 UPDATE account
 SET account_type = 'Admin'
 WHERE account_email = 'tony@starkent.com';
