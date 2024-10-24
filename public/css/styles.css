@@ -53,7 +53,7 @@ nav {
   /* top: 0; */
   width: 100%;
   text-align: center;
-  background-color: #171616;
+  background-color: #c1ebb2;
   padding: 10px 0;
   color: #ebe9e9;
 }
@@ -71,10 +71,11 @@ nav ul li {
 
 nav ul li a {
   text-decoration: none;
-  color: #333;
+  color: #0a0a0a;
   font-weight: bold;
   /* Bolds the links */
   font-size: 1rem;
+
 }
 
 nav ul li a:hover {
