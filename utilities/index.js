@@ -58,3 +58,25 @@ Util.buildClassificationGrid = async function (data) {
     }
     return grid
 }
+
+/* **************************************
+* Build the detail view HTML
+* ************************************ */
+Util.buildCarModelPage = async function (car) {
+    let page = ''; // Initialize as an empty string
+
+    if (car) { // Check if the car object is defined
+        page += `<div id="car-detail">`;
+        page += `<h2>${car.inv_make} ${car.inv_model}</h2>`;
+        page += `<img src="${car.inv_image}" alt="Image of ${car.inv_make} ${car.inv_model} on CSE Motors" />`;
+        page += `<div class="price">`;
+        page += `<span>$${new Intl.NumberFormat('en-US').format(car.inv_price)}</span>`;
+        page += `</div>`;
+        page += `<div class="description">${car.inv_description}</div>`; // Assuming you have a description field
+        page += `</div>`;
+    } else {
+        page += '<p class="notice">Sorry, no matching vehicle could be found.</p>';
+    }
+
+    return page;
+}

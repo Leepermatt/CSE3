@@ -19,13 +19,23 @@ invCont.buildByClassificationId = async function (req, res, next) {
     })
 }
 invCont.buildByCarDetail = async function (req, res, next) {
+    // Log to verify the function is being called
+    console.log("buildByCarDetail function called");
+
+    // Log to check if the route receives the invId parameter
+    console.log("Received invId:", req.params.invId);
     const inv_id = req.params.invId
-    const carData = await invCar.getCarDetail(inv_id)
+    const carData = await invModel.getCarDetail(inv_id)
+    // Check if carData has any result
+    if (!carData || carData.length === 0) {
+        return res.status(404).send("Car not found");
+    }
+    const vehicle = carData[0]; // Assuming you want the first item from the result
     const page = await utilities.buildCarModelPage(carData)
     let nav = await utilities.getNav()
-    const carName = data[0].car_name
-    res.render("./inventory/", {
-        title: carName,
+    // const carName = carData[0]?.car_name || "Vehicle Details"
+    res.render("./inventory/detail", {
+        title: `${vehicle.inv_make} ${vehicle.inv_model}`,
         nav,
         page,
     })
