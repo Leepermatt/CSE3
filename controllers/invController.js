@@ -19,12 +19,13 @@ invCont.buildByClassificationId = async function (req, res, next) {
     })
 }
 invCont.buildByCarDetail = async function (req, res, next) {
+    const inv_id = req.params.invId
     // Log to verify the function is being called
     console.log("buildByCarDetail function called");
 
     // Log to check if the route receives the invId parameter
     console.log("Received invId:", req.params.invId);
-    const inv_id = req.params.invId
+
     const carData = await invModel.getCarDetail(inv_id)
     // Check if carData has any result
     if (!carData || carData.length === 0) {
