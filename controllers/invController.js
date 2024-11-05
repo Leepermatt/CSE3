@@ -32,7 +32,8 @@ invCont.buildByCarDetail = async function (req, res, next) {
         return res.status(404).send("Car not found");
     }
     const vehicle = carData[0]; // Assuming you want the first item from the result
-    const page = await utilities.buildCarModelPage(carData)
+    console.log(carData[0])
+    const page = await utilities.buildCarModelPage(vehicle)
     let nav = await utilities.getNav()
     // const carName = carData[0]?.car_name || "Vehicle Details"
     res.render("./inventory/detail", {
