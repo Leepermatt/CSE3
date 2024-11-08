@@ -400,3 +400,148 @@ p a {
 p a:hover {
   text-decoration: underline;
 }
+
+#car-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1em;
+}
+
+#car-detail img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  margin-bottom: 1em;
+}
+
+#car-detail .content {
+  max-width: 500px;
+  padding: 0 1em;
+}
+
+.price {
+  font-size: 2.4em;
+  font-weight: bold;
+  color: red;
+  margin-top: 0.5em;
+}
+
+.miles {
+  font-size: 1.8em;
+  color: #666;
+  margin-top: 0.5em;
+}
+
+.description {
+  font-size: 1em;
+  color: #333;
+  margin-top: 1em;
+  line-height: 1.5;
+}
+
+/* Media query for larger screens */
+@media (min-width: 768px) {
+  #car-detail {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  #car-detail img {
+    margin: 0;
+    /* Remove margin when side-by-side */
+  }
+
+  #car-detail .content {
+    padding: 0 1em;
+  }
+
+  .price,
+  .miles,
+  .description {
+    margin: 0 1em;
+    /* Add side margin to each item */
+  }
+}
+
+#inv-display {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5em;
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 1200px;
+  justify-content: center;
+}
+
+#inv-display li {
+  background-color: #e6f4e6;
+  /* Light green background */
+  border: 2px solid #2e7d32;
+  /* Dark green border */
+  border-radius: 8px;
+  width: 250px;
+  padding: 1em;
+  text-align: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#inv-display li:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+#inv-display img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin-bottom: 0.8em;
+}
+
+#inv-display .namePrice {
+  color: #2e7d32;
+  /* Dark green for text */
+}
+
+#inv-display h2 {
+  font-size: 1.3em;
+  color: #2e7d32;
+  /* Dark green for title */
+  margin: 0.5em 0;
+}
+
+#inv-display h2 a {
+  text-decoration: none;
+  color: #2e7d32;
+}
+
+#inv-display h2 a:hover {
+  color: #1b5e20;
+  /* Slightly darker green on hover */
+}
+
+#inv-display hr {
+  border: 1px solid #c5e1a5;
+  /* Lighter green color */
+  margin: 0.5em 0;
+}
+
+#inv-display span {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #1b5e20;
+  /* Dark green for price */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  #inv-display li {
+    width: 100%;
+    max-width: 400px;
+  }
+}

@@ -60,7 +60,7 @@ app.use("/account", require("./routes/accountRoute"))
 app.use("/inv", inventoryRoute)
 
 // Route to build login view
-router.get("/login", utilities.handleErrors(accountController.buildLogin))
+// router.get("/login", utilities.handleErrors(accountController.buildLogin))
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
   next({ status: 404, message: 'Sorry, we appear to have lost that page.' })

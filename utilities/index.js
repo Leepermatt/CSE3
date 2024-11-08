@@ -69,9 +69,9 @@ Util.buildClassificationGrid = async function (data) {
                 + '" title="View ' + vehicle.inv_make + ' ' + vehicle.inv_model
                 + 'details"><img src="' + vehicle.inv_thumbnail
                 + '" alt="Image of ' + vehicle.inv_make + ' ' + vehicle.inv_model
-                + ' on CSE Motors" /></a>'
+                + ' on CSE Motors"></a>'
             grid += '<div class="namePrice">'
-            grid += '<hr />'
+            grid += '<hr>'
             grid += '<h2>'
             grid += '<a href="../../inv/detail/' + vehicle.inv_id + '" title="View '
                 + vehicle.inv_make + ' ' + vehicle.inv_model + ' details">'
@@ -98,9 +98,12 @@ Util.buildCarModelPage = async function (car) {
     if (car) { // Check if the car object is defined
         page += `<div id="car-detail">`;
         page += `<h2>${car.inv_make} ${car.inv_model}</h2>`;
-        page += `<img src="${car.inv_image}" alt="Image of ${car.inv_make} ${car.inv_model} on CSE Motors" />`;
+        page += `<img src="${car.inv_image}" alt="Image of ${car.inv_make} ${car.inv_model} on CSE Motors">`;
         page += `<div class="price">`;
         page += `<span>$${new Intl.NumberFormat('en-US').format(car.inv_price)}</span>`;
+        page += `</div>`;
+        page += `<div class = "miles">`;
+        page += `<span>${new Intl.NumberFormat('en-US').format(car.inv_miles) + " miles"}</span>`;
         page += `</div>`;
         page += `<div class="description">${car.inv_description}</div>`; // Assuming you have a description field
         page += `</div>`;
