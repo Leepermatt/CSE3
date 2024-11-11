@@ -1,10 +1,11 @@
-<!-- view content heading -->
 <% if (title) { %>
     <h1>
         <%= title %>
     </h1>
-    <% } else { res.redirect('/') } %>
+    <% } %>
 
-        <p>
-            <%= message %>
-        </p>
+        <% if (message) { %>
+            <p>
+                <%= message %>
+            </p>
+            <% } %>

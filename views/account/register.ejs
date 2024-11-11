@@ -1,27 +1,33 @@
-<!-- view content heading -->
+<!-- View content heading -->
 <% if (title) { %>
     <h1>
         <%= title %>
     </h1>
-    <% } else { res.redirect('/') } %>
+    <% } %>
 
-        <%# message() %>
-            <form action="/account/register" method="post">
-                <label for="first_name">First Name:</label>
-                <input type="text" id="account_firstname" name="account_first_name" required>
-                <!-- Matches account_first_name in database -->
+        <% if (message) { %>
+            <p>
+                <%= message %>
+            </p>
+            <% } %>
+                <form action="/account/register" method="post">
+                    <p>All fields are required. </p>
+                    <label for="first_name">First Name:</label>
+                    <input type="text" id="account_firstname" name="account_first_name" required>
+                    <!-- Matches account_first_name in database -->
 
-                <label for="last_name">Last Name:</label>
-                <input type="text" id="account_lastname" name="account_last_name" required>
-                <!-- Matches account_last_name in database -->
+                    <label for="last_name">Last Name:</label>
+                    <input type="text" id="account_lastname" name="account_last_name" required>
+                    <!-- Matches account_last_name in database -->
 
-                <label for="email">Email Address:</label>
-                <input type="email" id="email" name="account_email" required> <!-- Matches account_email in database -->
+                    <label for="email">Email Address:</label>
+                    <input type="email" id="email" name="account_email" required>
+                    <!-- Matches account_email in database -->
 
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="account_password" required minlength="12"
-                    pattern="(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,}"
-                    title="Password must be at least 12 characters long, contain at least one capital letter, one number, and one special character.">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="account_password" required minlength="12"
+                        pattern="(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,}"
+                        title="Password must be at least 12 characters long, contain at least one capital letter, one number, and one special character.">
 
-                <button type="submit">Register</button>
-            </form>
+                    <button type="submit">Register</button>
+                </form>

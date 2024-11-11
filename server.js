@@ -16,6 +16,9 @@ const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
 const utilities = require('./utilities');
 const accountRoute = require('./routes/accountRoute')
+const bodyParser = require("body-parser")
+const accountController = require('./controllers/accountController')
+
 
 /* ***********************
  * Middleware
@@ -38,6 +41,11 @@ app.use(function (req, res, next) {
   next()
 })
 
+// icon fix
+// app.use(express.static('public'));  // Serve static files from the 'public' directory
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 /* ***********************
  * View Engine and Templates
  *************************/
@@ -53,15 +61,14 @@ app.use(static)
 //app.get("/", baseController.buildHome)
 app.get("/", utilities.handleErrors(baseController.buildHome))
 //app.get("/", function (req, res) { res.render("index", { title: "Home" }) })
-// app.use("/account", accountRoute)
+
 // Account routes
-app.use("/account", require("./routes/accountRoute"))
+app.use("/account", accountRoute)
 
 // Inventory routes
 app.use("/inv", inventoryRoute)
 
-// Route to build login view
-//router.get("/login", utilities.handleErrors(accountController.buildLogin))
+
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
   next({ status: 404, message: 'Sorry, we appear to have lost that page.' })
@@ -79,6 +86,7 @@ app.use(async (err, req, res, next) => {
     title: err.status || 'Server Error',
     message,
     nav
+
   })
 })
 
