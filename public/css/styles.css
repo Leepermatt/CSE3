@@ -452,27 +452,42 @@ form input:required:invalid {
 /* Media query for larger screens */
 @media (min-width: 768px) {
   #car-detail {
+    display: flex;
     flex-direction: row;
     align-items: flex-start;
-    justify-content: space-between;
+    justify-content: center;
+    /* Centers the content */
+    gap: 1em;
+    /* Adds space between the image and the content */
+    padding: 1em;
+    /* Adds padding around the container */
   }
 
   #car-detail img {
-    margin: 0;
-    /* Remove margin when side-by-side */
+    flex: 1;
+    /* Allows image to take up available space */
+    max-width: 50%;
+    /* Limits image width for better layout */
+    margin-right: 1em;
+    /* Space to separate image and content */
   }
 
   #car-detail .content {
+    flex: 2;
+    /* Allows content section more space */
     padding: 0 1em;
+    max-width: 500px;
+    /* Optional: Limits content width for readability */
   }
 
   .price,
   .miles,
   .description {
-    margin: 0 1em;
-    /* Add side margin to each item */
+    margin-bottom: 1em;
+    /* Adds spacing between each section */
   }
 }
+
 
 #inv-display {
   display: flex;
@@ -550,5 +565,30 @@ form input:required:invalid {
   #inv-display li {
     width: 100%;
     max-width: 400px;
+  }
+}
+
+/* Media query for larger screens */
+@media (min-width: 768px) {
+  .form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    /* Centers vertically */
+  }
+
+  #login,
+  #register {
+    flex-direction: column;
+    align-items: center;
+    /* Centers the form content */
+    justify-content: center;
+    width: 100%;
+    /* Takes full width inside container */
+    max-width: 400px;
+    /* Set a max width for readability */
+    margin: 0 auto;
+    /* Centers horizontally */
   }
 }
