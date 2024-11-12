@@ -54,14 +54,7 @@ Util.getNav = async function () {
     }
 };
 
-/* ****************************************
- * Middleware For Handling Errors
- * Wrap other function in this for 
- * General Error Handling
- **************************************** */
-Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
 
-module.exports = Util
 
 /* **************************************
 * Build the classification view HTML
@@ -120,3 +113,12 @@ Util.buildCarModelPage = async function (car) {
 
     return page;
 }
+
+/* ****************************************
+ * Middleware For Handling Errors
+ * Wrap other function in this for 
+ * General Error Handling
+ **************************************** */
+Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
+
+module.exports = Util

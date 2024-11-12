@@ -45,5 +45,5 @@ invCont.buildByCarDetail = async function (req, res, next) {
 
 module.exports = invCont
 
-//buildbycardetail
+
 
