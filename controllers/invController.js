@@ -19,6 +19,9 @@ invCont.buildByClassificationId = async function (req, res, next) {
         errors: null,
     })
 }
+/* *******************
+*  build by car detail
+* ******************** */
 invCont.buildByCarDetail = async function (req, res, next) {
     const inv_id = req.params.invId
     // Log to verify the function is being called
@@ -44,6 +47,137 @@ invCont.buildByCarDetail = async function (req, res, next) {
         errors: null,
     })
 }
+/* *******************
+*  build management page
+* ******************** */
+invCont.buildManagementPage = async function (req, res, next) {
+    //console.log("build management page called");
+    let nav = await utilities.getNav()
+
+
+    res.render("inventory/management", {
+        title: "Management",
+        nav,
+        errors: null,
+    });
+};
+
+/* *******************
+*  build classification page
+* ******************** */
+invCont.addClassification = async function (req, res, next) {
+    console.log("build classification page called");
+    let nav = await utilities.getNav()
+    res.render("inventory/add-classification", {
+        title: "Add New Classification",
+        nav,
+        errors: null,
+    });
+};
+
+/* ****************************************
+*  Process Classification
+* *************************************** */
+invCont.processClassification = async function (req, res) {
+    console.log("process classification page called");
+    let nav = await utilities.getNav()
+    const { classification_name } = req.body
+
+    const classResults = await invModel.registerClassification(
+        classification_name
+    )
+    if (classResults) {
+        req.flash(
+            "notice",
+            `Congratulations, you\'re registered ${classification_name}. It has been stored in the database.`
+
+
+        )
+        res.status(201).render("inventory/management", {
+            title: "Management",
+            nav,
+            errors: null
+        })
+
+
+    } else {
+        req.flash("notice", "Sorry, the registration failed.")
+        res.status(501).render("inventory/add-classification", {
+            title: "Add Classification",
+            nav,
+            errors: null
+        })
+    }
+}
+/* *******************
+*  build new inventory page
+* ******************** */
+invCont.addInventory = async function (req, res, next) {
+    console.log("build inventory page called");
+    let nav = await utilities.getNav()
+    let classificationList = await utilities.buildClassificationList() // Fetch classification dropdown
+    res.render("inventory/add-inventory", {
+        title: "Add New Inventory",
+        nav,
+        classificationList, // Pass to the EJS view
+        errors: null,
+    });
+};
+
+/* *******************
+*   new inventory page
+* ******************** */
+invCont.registerInventory = async function (req, res) {
+    let nav = await utilities.getNav()
+    let classificationList = await utilities.buildClassificationList() // Fetch classification dropdown
+
+    const {
+        inv_make,
+        inv_model,
+        inv_year,
+        inv_description,
+        inv_image,
+        inv_thumbnail,
+        inv_price,
+        inv_miles,
+        inv_color,
+        classification_id
+    } = req.body
+
+    const regResult = await invModel.registerInventory(
+        inv_make,
+        inv_model,
+        inv_year,
+        inv_description,
+        inv_image,
+        inv_thumbnail,
+        inv_price,
+        inv_miles,
+        inv_color,
+        classification_id
+    )
+
+    if (regResult) {
+        req.flash(
+            "notice",
+            `Success! The ${inv_make} ${inv_model} has been added to inventory.`
+        )
+        res.status(201).render("inventory/management", {
+            title: "Inventory Management",
+            nav,
+            errors: null,
+        })
+    } else {
+        req.flash("notice", "Sorry, adding the vehicle to inventory failed.")
+        res.status(501).render("inventory/add-inventory", {
+            title: "Add New Inventory",
+            nav,
+            classificationList, // Pass classification dropdown back to the form
+            errors: null,
+        })
+    }
+}
+
 
 module.exports = invCont
 

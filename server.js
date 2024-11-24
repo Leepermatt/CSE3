@@ -18,6 +18,7 @@ const utilities = require('./utilities');
 const accountRoute = require('./routes/accountRoute')
 const bodyParser = require("body-parser")
 const accountController = require('./controllers/accountController')
+const invController = require('./controllers/invController')
 
 
 /* ***********************
@@ -60,13 +61,16 @@ app.use(static)
 // Index route
 //app.get("/", baseController.buildHome)
 app.get("/", utilities.handleErrors(baseController.buildHome))
-//app.get("/", function (req, res) { res.render("index", { title: "Home" }) })
+
 
 // Account routes
 app.use("/account", accountRoute)
 
 // Inventory routes
 app.use("/inv", inventoryRoute)
+
+
+
 
 // Add this line to handle favicon requests and prevent the error
 app.get('/favicon.ico', (req, res) => res.status(204).end());

@@ -1,0 +1,33 @@
+<!-- View content heading -->
+<% if (title) { %>
+    <h1>
+        <%= title %>
+    </h1>
+    <% } %>
+        <%- messages() %>
+            <% if (errors) { %>
+                <ul class="notice">
+                    <% errors.array().forEach(error=> { %>
+                        <li>
+                            <%= error.msg %>
+                        </li>
+                        <% }) %>
+                </ul>
+                <% } %>
+
+                    <!-- Add Classification Form -->
+                    <div>
+                        <form class="addClassificationForm" method="post">
+                            <label for="classification_name">New Classification Name</label>
+                            <input type="text" id="classification_name" name="classification_name" class="form-control"
+                                required pattern="^[a-zA-Z0-9]+$"
+                                title="Classification name must only contain letters and numbers, no spaces or special characters." />
+                            <small class="form-text text-muted">
+                                Classification name must only contain letters and numbers. No spaces or special
+                                characters are allowed.
+                            </small>
+
+
+                            <button type="submit" class="btn btn-primary">Add Classification</button>
+                        </form>
+                    </div>
