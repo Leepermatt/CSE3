@@ -1,8 +1,13 @@
 // Needed Resources 
-const express = require("express")
-const router = new express.Router()
+
+const express = require("express");
+const router = new express.Router();
 const invController = require("../controllers/invController");
 const { handleErrors } = require("../utilities");
+//const utilities = require("../utilities/index"); // Import utilities
+const carValidate = require('../utilities/Inventory-validation');
+
+//const { carRegistrationRules, checkCarRegData } = require("./utilities/inventory-validation");
 
 // Route to build inventory by classification view
 router.get("/type/:classificationId", handleErrors(invController.buildByClassificationId));
@@ -27,9 +32,14 @@ router.get('/add-inventory', handleErrors(invController.addInventory));
 console.log("add inventory has been called.");
 
 router.post(
+
     "/add-inventory",
-    invController.processClassification
-)
+    //handleErrors(carValidate.carRegistrationRules),
+    //handleErrors(carValidate.checkCarRegData),
+    handleErrors(invController.processCarInventory)
+
+
+);
 //route for error
 router.get("/error", handleErrors((req, res, next) => {
     throw new Error('intentional 500 error')

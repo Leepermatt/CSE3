@@ -62,7 +62,9 @@ async function registerClassification(classification_name) {
         return error.message
     }
 }
-
+/* ***************************
+ *  Add mew inventory
+ * ************************** */
 async function registerInventory(
     inv_make,
     inv_model,

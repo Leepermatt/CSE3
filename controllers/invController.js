@@ -22,6 +22,29 @@ invCont.buildByClassificationId = async function (req, res, next) {
 /* *******************
 *  build by car detail
 * ******************** */
+invCont.buildNewCarDetail = async function (req, res, next) {
+    try {
+        let nav = await utilities.getNav(); // Build the navigation
+        res.render("./inventory/new-car-detail", {
+            title: "Create New Car Detail",
+            nav,
+            errors: null,
+            inv_make: "",
+            inv_model: "",
+            inv_year: "",
+            inv_description: "",
+            inv_price: "",
+            inv_miles: "",
+            inv_color: "",
+        });
+    } catch (error) {
+        console.error("Error rendering new car detail view:", error);
+        next(error); // Pass the error to the global error handler
+    }
+};
+
+
+
 invCont.buildByCarDetail = async function (req, res, next) {
     const inv_id = req.params.invId
     // Log to verify the function is being called
@@ -58,6 +81,7 @@ invCont.buildManagementPage = async function (req, res, next) {
     res.render("inventory/management", {
         title: "Management",
         nav,
+        //messages: req.flash(), // Pass flash messages to the view
         errors: null,
     });
 };
@@ -71,6 +95,7 @@ invCont.addClassification = async function (req, res, next) {
     res.render("inventory/add-classification", {
         title: "Add New Classification",
         nav,
+        //messages: req.flash(), // Pass flash messages to the view
         errors: null,
     });
 };
@@ -116,18 +141,21 @@ invCont.addInventory = async function (req, res, next) {
     console.log("build inventory page called");
     let nav = await utilities.getNav()
     let classificationList = await utilities.buildClassificationList() // Fetch classification dropdown
+    //let newCar = await utilities.buildCarModelPage()
     res.render("inventory/add-inventory", {
         title: "Add New Inventory",
         nav,
-        classificationList, // Pass to the EJS view
+        classificationList,
+        //messages: req.flash(), // Pass flash messages to the view
+        //newCar,
         errors: null,
     });
 };
 
 /* *******************
-*   new inventory page
+*   process new inventory page
 * ******************** */
-invCont.registerInventory = async function (req, res) {
+invCont.processCarInventory = async function (req, res) {
     let nav = await utilities.getNav()
     let classificationList = await utilities.buildClassificationList() // Fetch classification dropdown
 
@@ -173,6 +201,7 @@ invCont.registerInventory = async function (req, res) {
             title: "Add New Inventory",
             nav,
             classificationList, // Pass classification dropdown back to the form
+            messages: req.flash(), // Pass flash messages to the view
             errors: null,
         })
     }

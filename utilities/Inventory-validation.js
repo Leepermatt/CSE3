@@ -3,7 +3,10 @@ const { body, validationResult } = require("express-validator")
 const validateCar = {}
 
 
-validateCar.carRegistationRules = () => {
+/*  **********************************
+*   Car Registration Data Validation Rules
+* ********************************* */
+validateCar.carRegistrationRules = () => {
     return [
         // inv make is required and must be string
         body("inv_make")
@@ -81,5 +84,32 @@ validateCar.carRegistationRules = () => {
     ]
 }
 
+/* ******************************
+ * Check data and return errors or continue to registration
+ * ***************************** */
+validateCar.checkCarRegData = async (req, res, next) => {
+    const { inv_make, inv_model, inv_year, inv_description, inv_thumbnail, inv_image, inv_mileage, inv_color } = req.body
+    let errors = []
+    errors = validationResult(req)
+    if (!errors.isEmpty()) {
+        let nav = await utilities.getNav()
+        res.render("inventory/management", {
+            errors,
+            title: "Management",
+            nav,
+            inv_make,
+            inv_model,
+            inv_year,
+            inv_description,
+            inv_thumbnail,
+            inv_image,
+            inv_mileage,
+            inv_color
 
+        })
+        return
+    }
+    next()
+}
+module.exports = validateCar
 

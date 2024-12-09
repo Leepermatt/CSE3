@@ -5,22 +5,25 @@
 /* ***********************
  * Require Statements
  *************************/
+const express = require("express")
 const session = require("express-session")
 const pool = require('./database/')
-const express = require("express")
+const flash = require("connect-flash");
 const expressLayouts = require("express-ejs-layouts")
 const env = require("dotenv").config()
-const app = express()
+
 const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
 const utilities = require('./utilities');
 const accountRoute = require('./routes/accountRoute')
-const bodyParser = require("body-parser")
+
 const accountController = require('./controllers/accountController')
 const invController = require('./controllers/invController')
+const bodyParser = require("body-parser")
+const cookieParser = require("cookie-parser")
 
-
+const app = express()
 /* ***********************
  * Middleware
  * ************************/
@@ -34,6 +37,10 @@ app.use(session({
   saveUninitialized: true,
   name: 'sessionId',
 }))
+// login activity
+app.use(cookieParser())
+
+
 
 // Express Messages Middleware
 app.use(require('connect-flash')())
@@ -47,6 +54,12 @@ app.use(function (req, res, next) {
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+// login activity
+//app.use(cookieParser())
+
+// login process activity
+
+app.use(utilities.checkJWTToken)
 /* ***********************
  * View Engine and Templates
  *************************/

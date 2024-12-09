@@ -1,30 +1,10 @@
+const jwt = require("jsonwebtoken")
+require("dotenv").config()
 const invModel = require("../models/inventory-model");
 const { link } = require("../routes/static");
 const Util = {}
 
-/* ************************
- * Constructs the nav HTML unordered list
- ************************** */
-// Util.getNav = async function (req, res, next) {
 
-//     let data = await invModel.getClassifications()
-//     let list = "<ul>"
-//     list += '<li><a href="/" title="Home page">Home</a></li>'
-//     data.rows.forEach((row) => {
-//         list += "<li>"
-//         list +=
-//             '<a href="/inv/type/' +
-//             row.classification_id +
-//             '" title="See our inventory of ' +
-//             row.classification_name +
-//             ' vehicles">' +
-//             row.classification_name +
-//             "</a>"
-//         list += "</li>"
-//     })
-//     list += "</ul>"
-//     return list
-// }
 
 Util.getNav = async function () {
     try {
@@ -106,7 +86,9 @@ Util.buildCarModelPage = async function (car) {
         page += `<div class = "miles">`;
         page += `<span>${new Intl.NumberFormat('en-US').format(car.inv_miles) + " miles"}</span>`;
         page += `</div>`;
-        page += `<div class="description">${car.inv_description}</div>`; // Assuming you have a description field
+        page += `<div class="description">${car.inv_description}</div>`;
+        page += `</div>`;
+        page += `<div class="color">${car.inv_color}</div>`;
         page += `</div>`;
     } else {
         page += '<p class="notice">Sorry, no matching vehicle could be found.</p>';
@@ -168,5 +150,44 @@ Util.buildClassificationList = async function (classification_id = null) {
  * General Error Handling
  **************************************** */
 Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
+
+/* ****************************************
+* Middleware to check token validity
+**************************************** */
+Util.checkJWTToken = (req, res, next) => {
+    console.log("Cookies received:", req.cookies);
+    console.log("ACCESS_TOKEN_SECRET:", process.env.ACCESS_TOKEN_SECRET);
+
+    if (req.cookies.jwt) {
+        jwt.verify(
+            req.cookies.jwt,
+            process.env.ACCESS_TOKEN_SECRET,
+            function (err, accountData) {
+                if (err) {
+                    req.flash("Please log in")
+                    res.clearCookie("jwt")
+                    return res.redirect("/account/login")
+                }
+                res.locals.accountData = accountData
+                res.locals.loggedin = 1
+                next()
+            })
+    } else {
+        next()
+    }
+}
+
+/* ****************************************
+ *  Check Login
+ * ************************************ */
+Util.checkLogin = (req, res, next) => {
+    if (res.locals.loggedin) {
+        next()
+    } else {
+        req.flash("notice", "Please log in.")
+        return res.redirect("/account/login")
+    }
+}
+
 
 module.exports = Util
