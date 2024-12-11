@@ -4,7 +4,7 @@ const express = require("express");
 const router = new express.Router();
 const invController = require("../controllers/invController");
 const { handleErrors } = require("../utilities");
-//const utilities = require("../utilities/index"); // Import utilities
+const utilities = require("../utilities/index"); // Import utilities
 const carValidate = require('../utilities/Inventory-validation');
 
 //const { carRegistrationRules, checkCarRegData } = require("./utilities/inventory-validation");
@@ -12,6 +12,8 @@ const carValidate = require('../utilities/Inventory-validation');
 // Route to build inventory by classification view
 router.get("/type/:classificationId", handleErrors(invController.buildByClassificationId));
 
+// route to get inventory by class unit 6
+router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
 
 // router.get("/type/:getCarDetail", invController.buildByCarDetail);
 router.get("/detail/:invId", handleErrors(invController.buildByCarDetail));
