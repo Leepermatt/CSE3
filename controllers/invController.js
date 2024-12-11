@@ -76,12 +76,13 @@ invCont.buildByCarDetail = async function (req, res, next) {
 invCont.buildManagementPage = async function (req, res, next) {
     //console.log("build management page called");
     let nav = await utilities.getNav()
-
+    let classificationList = await utilities.buildClassificationList();
 
     res.render("inventory/management", {
         title: "Management",
         nav,
         //messages: req.flash(), // Pass flash messages to the view
+        classificationList,
         errors: null,
     });
 };
@@ -141,13 +142,12 @@ invCont.addInventory = async function (req, res, next) {
     console.log("build inventory page called");
     let nav = await utilities.getNav()
     let classificationList = await utilities.buildClassificationList() // Fetch classification dropdown
-    //let newCar = await utilities.buildCarModelPage()
+
     res.render("inventory/add-inventory", {
         title: "Add New Inventory",
         nav,
         classificationList,
-        //messages: req.flash(), // Pass flash messages to the view
-        //newCar,
+
         errors: null,
     });
 };

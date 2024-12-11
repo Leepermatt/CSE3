@@ -13,4 +13,13 @@
                 <a href="./add-classification" id="addClassificationLink" class="btn btn-primary">Add New
                     Classification</a>
                 <a href="./add-inventory" id="addInventoryLink" class="btn btn-success">Add New Inventory</a>
+                <h2>Manage Inventory</h2>
+                <p>Please select the classification from the list to see the items in that category</p>
+                <div>
+                    <label for="classificationList">Classification</label>
+
+                    <%- classificationList %>
+
+                </div>
+                <table id="inventoryDisplay"></table>
             </div>
