@@ -15,6 +15,16 @@ router.get("/type/:classificationId", handleErrors(invController.buildByClassifi
 // route to get inventory by class unit 6
 router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
 
+// Route to display the edit inventory view for a specific inventory item
+router.get('/edit/:inv_id', utilities.handleErrors(invController.editInventoryView));
+console.log("Edit Inventory View route triggered with inv_id:");
+
+// router.get(
+//     '/edit-inventory/:inv_id',
+//     utilities.handleErrors(invController.editInventoryView) // Controller function handles the request
+// );
+// router post to handle update.
+router.post("/edit/:inv_id", utilities.handleErrors(invController.updateInventory));
 // router.get("/type/:getCarDetail", invController.buildByCarDetail);
 router.get("/detail/:invId", handleErrors(invController.buildByCarDetail));
 

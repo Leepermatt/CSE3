@@ -111,5 +111,7 @@ validateCar.checkCarRegData = async (req, res, next) => {
     }
     next()
 }
+
+
 module.exports = validateCar
 
