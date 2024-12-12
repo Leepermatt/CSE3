@@ -24,7 +24,16 @@ console.log("Edit Inventory View route triggered with inv_id:");
 //     utilities.handleErrors(invController.editInventoryView) // Controller function handles the request
 // );
 // router post to handle update.
-router.post("/edit/:inv_id", utilities.handleErrors(invController.updateInventory));
+//router.post("/edit/:inv_id", utilities.handleErrors(invController.updateInventory));
+//router.post("/update/", utilities.handleErrors(invController.updateInventory));
+// Route to handle inventory update
+router.post("/update",
+    carValidate.newInventoryRules(),  // Use the updated validation function
+    carValidate.checkCarUpdateData,      // Use the existing checkUpdateData middleware
+    utilities.handleErrors(invController.updateInventory)
+);
+
+
 // router.get("/type/:getCarDetail", invController.buildByCarDetail);
 router.get("/detail/:invId", handleErrors(invController.buildByCarDetail));
 

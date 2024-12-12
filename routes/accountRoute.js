@@ -6,7 +6,7 @@ const accountController = require("../controllers/accountController"); // Accoun
 const utilities = require("../utilities/index"); // Import utilities
 
 
-//router.get("/login", accountController.buildLogin);
+
 // Route to build login view
 router.get("/login", utilities.handleErrors(accountController.buildLogin))
 
@@ -20,18 +20,12 @@ router.post(
     regValidate.checkRegData,
     utilities.handleErrors(accountController.registerAccount)
 )
-// Process the login attempt temporary
-// router.post(
-//     "/login",
-//     (req, res) => {
-//         res.status(200).send('login process')
-//     }
-// )
+
 // Process the login request
 router.post(
     "/account",
-    //regValidate.loginRules(),
-    //regValidate.checkLoginData,
+    regValidate.loginRules(),
+    regValidate.checkLoginData,
     utilities.handleErrors(accountController.accountLogin)
 )
 router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.buildAccountManagement));
