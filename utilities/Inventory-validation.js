@@ -43,19 +43,19 @@ validateCar.carRegistrationRules = () => {
 
         // Validate inv_image
         body("inv_image")
-            .custom((value, { req }) => {
-                req.body.inv_thumbnail = "/images/no-image.png"; // Set a default value
-                return true;
-            })
+            .trim()
+            .escape()
+            .notEmpty()
+            .isLength({ min: 2 })
             .withMessage("Image is required."),
 
 
         // Validate inv_thumbnail
         body("inv_thumbnail")
-            .custom((value, { req }) => {
-                req.body.inv_thumbnail = "/images/no-image-tn.png"; // Set a default value
-                return true;
-            })
+            .trim()
+            .escape()
+            .notEmpty()
+            .isLength({ min: 2 })
             .withMessage("Thumbnail is required."),
         // price
         body("inv_price")
@@ -143,7 +143,7 @@ validateCar.checkCarUpdateData = async (req, res, next) => {
 }
 
 /*  **********************************
-*   Car Registration Data Validation Rules
+*   Car update Data Validation Rules
 * ********************************* */
 validateCar.newInventoryRules = () => {
     return [

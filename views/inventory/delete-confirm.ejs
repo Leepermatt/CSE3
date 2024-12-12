@@ -1,0 +1,53 @@
+<!-- View content heading -->
+<% if (title) { %>
+    <h1>
+        <%= title %>
+    </h1>
+    <% } %>
+        <%- messages() %>
+
+            <% if (errors) { %>
+                <ul class="notice">
+                    <% errors.array().forEach(error=> { %>
+                        <li>
+                            <%= error.msg %>
+                        </li>
+                        <% }) %>
+                </ul>
+                <% } %>
+
+                    <!-- Delete Confirmation Form -->
+                    <form id="deleteForm" action="/inv/delete/<%= locals.inv_id || '' %>" method="POST">
+                        <div>
+                            <label for="inv_make">Make</label>
+                            <input type="text" id="inv_make" name="inv_make" value="<%= locals.inv_make || '' %>"
+                                readonly>
+                        </div>
+
+                        <div>
+                            <label for="inv_model">Model</label>
+                            <input type="text" id="inv_model" name="inv_model" value="<%= locals.inv_model || '' %>"
+                                readonly>
+                        </div>
+
+                        <div>
+                            <label for="inv_year">Year</label>
+                            <input type="number" id="inv_year" name="inv_year" value="<%= locals.inv_year || '' %>"
+                                readonly>
+                        </div>
+
+                        <div>
+                            <label for="inv_price">Price</label>
+                            <input type="number" id="inv_price" name="inv_price" step="0.01"
+                                value="<%= locals.inv_price || '' %>" readonly>
+                        </div>
+
+                        <!-- Hidden field for inv_id -->
+                        <input type="hidden" name="inv_id" value="<%= locals.inv_id || '' %>">
+
+                        <div>
+                            <button type="submit">Confirm Deletion</button>
+                            <p>Confirm Deletion - The delete is permanent.</p>
+                        </div>
+                        <a href="/inv/management">Cancel</a> <!-- Link to go back to the inventory management page -->
+                    </form>

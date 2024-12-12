@@ -19,13 +19,7 @@ router.get("/getInventory/:classification_id", utilities.handleErrors(invControl
 router.get('/edit/:inv_id', utilities.handleErrors(invController.editInventoryView));
 console.log("Edit Inventory View route triggered with inv_id:");
 
-// router.get(
-//     '/edit-inventory/:inv_id',
-//     utilities.handleErrors(invController.editInventoryView) // Controller function handles the request
-// );
-// router post to handle update.
-//router.post("/edit/:inv_id", utilities.handleErrors(invController.updateInventory));
-//router.post("/update/", utilities.handleErrors(invController.updateInventory));
+
 // Route to handle inventory update
 router.post("/update",
     carValidate.newInventoryRules(),  // Use the updated validation function
@@ -59,8 +53,15 @@ router.post(
     //handleErrors(carValidate.checkCarRegData),
     handleErrors(invController.processCarInventory)
 
-
 );
+// route to delete
+// Route to show the delete confirmation view
+router.get("/delete/:inv_id", utilities.handleErrors(invController.showDeleteConfirmation));
+
+// Route to handle the deletion of the inventory item
+router.post("/delete/:inv_id", utilities.handleErrors(invController.deleteInventory));
+
+
 //route for error
 router.get("/error", handleErrors((req, res, next) => {
     throw new Error('intentional 500 error')
