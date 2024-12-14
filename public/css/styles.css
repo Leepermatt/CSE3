@@ -553,7 +553,8 @@ form input:required:invalid {
   margin: 0.5em 0;
 }
 
-#inv-display span {
+#inv-display,
+#action-links span {
   font-size: 1.2em;
   font-weight: bold;
   color: #1b5e20;
@@ -562,7 +563,9 @@ form input:required:invalid {
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  #inv-display li {
+
+  #inv-display,
+  #action-links li {
     width: 100%;
     max-width: 400px;
   }
@@ -570,7 +573,9 @@ form input:required:invalid {
 
 /* Media query for larger screens */
 @media (min-width: 768px) {
-  .form-container {
+
+  .form-container,
+  .action-links {
     display: flex;
     justify-content: center;
     align-items: center;

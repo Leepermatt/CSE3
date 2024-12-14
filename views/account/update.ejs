@@ -1,0 +1,55 @@
+<!-- View content heading -->
+<% if (title) { %>
+    <h1>
+        <%= title %>
+    </h1>
+    <% } %>
+        <%- messages() %>
+
+            <% if (errors) { %>
+                <ul class="notice">
+                    <% errors.array().forEach(error=> { %>
+                        <li>
+                            <%= error.msg %>
+                        </li>
+                        <% }) %>
+                </ul>
+                <% } %>
+                    <form action="/account/update" method="POST">
+                        <label for="account_firstname">First Name:</label>
+                        <input type="text" id="account_firstname" name="account_firstname"
+                            value="<%= locals.account_firstname %>" required>
+
+                        <label for="account_lastname">Last Name:</label>
+                        <input type="text" id="account_lastname" name="account_lastname"
+                            value="<%= locals.account_lastname %>" required>
+
+                        <label for="account_email">Email:</label>
+                        <input type="email" id="account_email" name="account_email" value="<%= locals.account_email %>"
+                            required>
+
+                        <!-- Hidden field for account_id -->
+                        <input type="hidden" name="account_id" value="<%= locals.account_id || '' %>">
+
+                        <!-- Hidden fields to pass existing account password and account type -->
+                        <input type="hidden" name="account_password" value="<%= locals.account_password %>">
+                        <input type="hidden" name="account_type" value="<%= locals.account_type %>">
+
+                        <button type="submit">Update</button>
+
+                        <form action="/account/update" method="POST">
+                            <label for="current_password">Current Password:</label>
+                            <input type="password" id="current_password" name="current_password"
+                                value="<%= locals.current_password || '' %>">
+
+                            <label for="new_password">New Password:</label>
+                            <input type="password" id="new_password" name="new_password"
+                                value="<%= locals.new_password || '' %>">
+
+                            <label for="confirm_password">Confirm New Password:</label>
+                            <input type="password" id="confirm_password" name="confirm_password"
+                                value="<%= locals.confirm_password || '' %>">
+
+                            <button type="submit">Change Password</button>
+                        </form>
+                    </form>

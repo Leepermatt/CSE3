@@ -98,6 +98,62 @@ validate.loginRules = () => {
     ]
 }
 
+/*  **********************************
+*   update account Data Validation Rules
+* ********************************* */
+
+validate.updateAccountRules = () => {
+    return [
+        body("account_firstname")
+            .trim()
+            .escape()
+            .notEmpty()
+            .withMessage("First name is required."),
+        body("account_lastname")
+            .trim()
+            .escape()
+            .notEmpty()
+            .withMessage("Last name is required."),
+        body("account_email")
+            .trim()
+            .escape()
+            .notEmpty()
+            .isEmail()
+            .normalizeEmail()
+            .withMessage("A valid email is required.")
+            .custom(async (account_email, { req }) => {
+                // Check if email is already in use by another user
+                const emailExists = await accountModel.checkExistingEmail(account_email, req.user.account_id)
+                if (emailExists) {
+                    throw new Error("Email already exists. Please use a different email.")
+                }
+            })
+    ]
+}
+
+/* ******************************
+ * Check data and return errors or continue to registration
+ * ***************************** */
+validate.checkUpdateData = async (req, res, next) => {
+    const { account_firstname, account_lastname, account_email } = req.body
+    let errors = []
+    errors = validationResult(req)
+    if (!errors.isEmpty()) {
+        let nav = await utilities.getNav()
+        res.render("account/update", {
+            errors,
+            title: "Update Account Information",
+            nav,
+            account_firstname,
+            account_lastname,
+            account_email,
+        })
+        return
+    }
+    next()
+}
+
+
 /* ******************************
  * Check data and return errors or continue to login
  * ***************************** */
@@ -117,4 +173,6 @@ validate.checkLoginData = async (req, res, next) => {
     }
     next()
 }
+
+
 module.exports = validate

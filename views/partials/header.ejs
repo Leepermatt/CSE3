@@ -3,6 +3,28 @@
         <a href="/" title="Return to home page"> CSE Motors</a>
     </span>
     <div id="tools">
-        <a title="Click to log in" href="/account/login">My Account</a>
+
+        <% if (userLoggedIn) { %>
+            <pre>
+                userLoggedIn: <%= userLoggedIn %>
+                userType: <%= userType %>
+                userFirstName: <%= userName %>
+                </pre>
+            <!-- Show "Welcome [Username]" and "Account Management" link when the user is logged in -->
+            <span>Welcome <%= userName %></span>
+            <a title="Click to manage your account" href="/account/update">Account Management</a>
+            <a title="Click to log out" href="/account/logout">Logout</a>
+            <% if (userType==='Employee' || userType==='Admin' ) { %>
+                <!-- Additional content for Employee or Admin -->
+                <h2>Welcome <%= userName %>
+                </h2>
+                <h3>Inventory Management</h3>
+                <p><a href="/inventory/management" title="Manage inventory">Go to Inventory Management</a></p>
+                <% } %>
+                    <% } else { %>
+                        <!-- Show "My Account" link when the user is not logged in -->
+                        <a title="Click to log in" href="/account/login">Log In</a>
+                        <a href="/account/register">Register a new account</a>
+                        <% } %>
     </div>
 </header>

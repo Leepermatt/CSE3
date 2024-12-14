@@ -22,8 +22,16 @@ const accountController = require('./controllers/accountController')
 const invController = require('./controllers/invController')
 const bodyParser = require("body-parser")
 const cookieParser = require("cookie-parser")
+//add to chekc log in
+const { checkLoginStatus } = require("./controllers/accountController")
 
 const app = express()
+
+const jwt = require("jsonwebtoken")
+
+
+//app.use(checkLoginStatus);
+
 /* ***********************
  * Middleware
  * ************************/
@@ -60,6 +68,16 @@ app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-
 // login process activity
 
 app.use(utilities.checkJWTToken)
+
+app.use(checkLoginStatus);
+
+// Middleware to check login status (Ensure it skips logout route)
+app.use((req, res, next) => {
+  if (req.url === '/account/logout') {
+    return next(); // Skip login check for the logout route
+  }
+  checkLoginStatus(req, res, next); // Apply the check for all other routes
+});
 /* ***********************
  * View Engine and Templates
  *************************/
