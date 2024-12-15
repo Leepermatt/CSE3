@@ -4,8 +4,10 @@
         <%= title %>
     </h1>
     <% } %>
+
         <%- messages() %>
 
+            <!-- Display errors if any -->
             <% if (errors) { %>
                 <ul class="notice">
                     <% errors.array().forEach(error=> { %>
@@ -15,7 +17,9 @@
                         <% }) %>
                 </ul>
                 <% } %>
-                    <form action="/account/update" method="POST">
+
+                    <!-- Account Information Update Form -->
+                    <form method="POST" action="/account/update-info">
                         <label for="account_firstname">First Name:</label>
                         <input type="text" id="account_firstname" name="account_firstname"
                             value="<%= locals.account_firstname %>" required>
@@ -28,28 +32,41 @@
                         <input type="email" id="account_email" name="account_email" value="<%= locals.account_email %>"
                             required>
 
-                        <!-- Hidden field for account_id -->
+                        <!-- Hidden fields for account ID, password, and type -->
                         <input type="hidden" name="account_id" value="<%= locals.account_id || '' %>">
-
-                        <!-- Hidden fields to pass existing account password and account type -->
                         <input type="hidden" name="account_password" value="<%= locals.account_password %>">
                         <input type="hidden" name="account_type" value="<%= locals.account_type %>">
 
                         <button type="submit">Update</button>
+                    </form>
 
-                        <form action="/account/update" method="POST">
+                    <!-- Password Change Form -->
+                    <form method="POST">
+                        <!-- Current Password Field (masked as '***') -->
+                        <div>
                             <label for="current_password">Current Password:</label>
-                            <input type="password" id="current_password" name="current_password"
-                                value="<%= locals.current_password || '' %>">
+                            <input type="password" id="current_password" name="current_password" value="***" readonly>
+                            <p class="password-rules">Your current password will not be displayed for security reasons.
+                            </p>
+                        </div>
 
+                        <!-- New Password Field -->
+                        <div>
                             <label for="new_password">New Password:</label>
                             <input type="password" id="new_password" name="new_password"
-                                value="<%= locals.new_password || '' %>">
+                                value="<%= locals.new_password || '' %>" required minlength="12"
+                                pattern="(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,}"
+                                title="Password must be at least 12 characters long, contain at least one capital letter, one number, and one special character.">
+                            <p class="password-rules">New password must be at least 12 characters long, contain at least
+                                one uppercase letter, one number, and one special character.</p>
+                        </div>
 
+                        <!-- Confirm New Password Field -->
+                        <div>
                             <label for="confirm_password">Confirm New Password:</label>
                             <input type="password" id="confirm_password" name="confirm_password"
-                                value="<%= locals.confirm_password || '' %>">
+                                value="<%= locals.confirm_password || '' %>" required>
+                        </div>
 
-                            <button type="submit">Change Password</button>
-                        </form>
+                        <button type="submit">Change Password</button>
                     </form>

@@ -237,7 +237,7 @@ const buildAccountUpdate = async (req, res) => {
  * Process account update
  **************************************** */
 async function updateAccount(req, res) {
-    const { account_firstname, account_lastname, account_email, account_password, accouunt_type } = req.body
+    const { account_firstname, account_lastname, account_email, hashedPassword, account_type } = req.body
     const account_id = req.user.account_id
     let nav = await utilities.getNav()
 
@@ -248,13 +248,13 @@ async function updateAccount(req, res) {
             account_firstname,
             account_lastname,
             account_email,
-            account_password,
-            accouunt_type
+            hashedPassword,
+            account_type
         )
 
         if (updateResult) {
             req.flash("notice", "Account information updated successfully.")
-            res.redirect("/account")
+            res.redirect("/account/update")
         } else {
             req.flash("notice", "Error updating account. Please try again.")
             res.status(500).render("account/update", {
@@ -395,11 +395,13 @@ const populateAccountInfo = async (req, res) => {
     try {
         const nav = await utilities.getNav()
         const accountData = await accountModel.getAccountById(req.user.account_id) // Fetch user details
+
         if (!accountData) {
             req.flash("notice", "Account not found.")
             return res.redirect("/account/login")
         }
 
+        // Render the account update page with user data
         res.render("account/update", {
             title: "Account Update",
             nav,
@@ -407,6 +409,9 @@ const populateAccountInfo = async (req, res) => {
                 account_firstname: accountData.account_firstname,
                 account_lastname: accountData.account_lastname,
                 account_email: accountData.account_email,
+                account_id: accountData.account_id,
+                account_type: accountData.account_type, // If needed
+                account_password: "***", // Masked password for display (security purposes)
             },
         })
     } catch (error) {
@@ -415,6 +420,40 @@ const populateAccountInfo = async (req, res) => {
         res.redirect("/account")
     }
 }
+
+
+
+
+
+// const populateAccountInfo = async (req, res) => {
+//     if (!req.user) {
+//         req.flash("notice", "Please log in to access this page.")
+//         return res.redirect("/account/login")
+//     }
+
+//     try {
+//         const nav = await utilities.getNav()
+//         const accountData = await accountModel.getAccountById(req.user.account_id) // Fetch user details
+//         if (!accountData) {
+//             req.flash("notice", "Account not found.")
+//             return res.redirect("/account/login")
+//         }
+
+//         res.render("account/update", {
+//             title: "Account Update",
+//             nav,
+//             locals: {
+//                 account_firstname: accountData.account_firstname,
+//                 account_lastname: accountData.account_lastname,
+//                 account_email: accountData.account_email,
+//             },
+//         })
+//     } catch (error) {
+//         console.error("Error fetching account info:", error)
+//         req.flash("notice", "An unexpected error occurred. Please try again.")
+//         res.redirect("/account")
+//     }
+// }
 
 /* ****************************************
  * Process update password
