@@ -154,7 +154,7 @@ async function accountLogin(req, res) {
             }
             res.cookie("jwt", accessToken, cookieOptions);
 
-            return res.redirect("/account");
+            return res.redirect("/");
         } else {
             req.flash("notice", "Incorrect password. Please try again.");
             return res.status(400).render("account/login", {

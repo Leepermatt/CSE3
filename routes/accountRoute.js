@@ -23,7 +23,7 @@ router.post(
 
 // Process the login request
 router.post(
-    "/account",
+    "/login",
     regValidate.loginRules(),
     regValidate.checkLoginData,
     utilities.handleErrors(accountController.accountLogin)
@@ -47,17 +47,11 @@ router.post('/account/update',
     utilities.handleErrors(accountController.updateAccount))
 
 // Log out the user by clearing the JWT cookie
-router.get('/account/logout', (req, res) => {
-    console.log("log out called");
-    // Clear the JWT cookie by setting it to a past date
-    res.cookie("jwt", "", { httpOnly: true, maxAge: 0 });
+router.get('/logout',
+    utilities.handleErrors(accountController.logout))
+//console.log("log out called")
 
-    // Flash message to notify the user they have logged out
-    req.flash("notice", "You have successfully logged out.");
 
-    // Redirect to the login page
-    res.redirect('/account/login');
-});
 
 router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.buildAccountManagement));
 
